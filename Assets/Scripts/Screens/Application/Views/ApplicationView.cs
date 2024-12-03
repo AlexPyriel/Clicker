@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Core;
+using Screens.Clicker.Views;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,17 +22,21 @@ namespace Screens.Application.Views
         [SerializeField] private ScreenView _clickerTab;
         [SerializeField] private ScreenView _factsTab;
         [SerializeField] private List<ScreenView> _tabs;
-        
+
         public IObservable<Unit> ClickerButtonClick => _clickerButton.OnClickAsObservable();
         public IObservable<Unit> FactsButtonClick => _factsButton.OnClickAsObservable();
-        
-        public async void SelectClickerTab()
+
+        public void SelectClickerTab()
         {
+            _clickerButton.interactable = false;
+            _factsButton.interactable = true;
             _transitionAnimator.Animate(() => SwitchTab(_clickerTab));
         }
 
-        public async void SelectFactsTab()
+        public void SelectFactsTab()
         {
+            _clickerButton.interactable = true;
+            _factsButton.interactable = false;
             _transitionAnimator.Animate(() => SwitchTab(_factsTab));
         }
 

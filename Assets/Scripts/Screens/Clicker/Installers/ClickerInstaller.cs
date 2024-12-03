@@ -1,4 +1,5 @@
 using Infrastructure;
+using Screens.Clicker.Models;
 using Screens.Clicker.Presenters;
 using Screens.Clicker.Views;
 using Zenject;
@@ -14,6 +15,10 @@ namespace Screens.Clicker.Installers
             Container
                 .Bind<ClickerConfig>()
                 .FromResource(ConfigResourcesPath)
+                .AsSingle();
+
+            Container
+                .Bind<WeatherModel>()
                 .AsSingle();
             
             Container

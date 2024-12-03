@@ -1,5 +1,7 @@
+using Core.Network;
 using Screens;
 using Screens.Clicker.Installers;
+using UnityEngine;
 using Zenject;
 
 namespace Infrastructure
@@ -8,8 +10,15 @@ namespace Infrastructure
     {
         public override void InstallBindings()
         {
-            ApplicationInstaller.Install(Container);
-            ClickerInstaller.Install(Container);
+            Install<ApplicationInstaller>();
+            Install<ClickerInstaller>();
+            Install<NetworkInstaller>();    
+        }
+        
+        private void Install<T>() where T : Installer<T>
+        {
+            Installer<T>.Install(Container);
+            Debug.Log($"[PROJECT INSTALLER] Install: <b>{typeof(T).Name}</b>");
         }
     }
 }

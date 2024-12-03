@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Core.Network;
 using Cysharp.Threading.Tasks;
 using Infrastructure;
 using Screens.Clicker.Models;
@@ -14,14 +15,21 @@ namespace Screens.Clicker.Presenters
     {
         private readonly ClickerView _view;
         private readonly ClickerConfig _config;
+        private readonly WeatherModel _weatherModel;
+        private readonly GetWeatherCommandFactory _getWeatherCommandFactory;
+        private readonly ServerRequestInvoker _serverRequestInvoker;
         private ClickerModel _clickerModel;
         private CancellationTokenSource _cancellationTokenSource;
         private CompositeDisposable _disposables;
+        private bool _isRunning = true;
 
-        public ClickerPresenter(ClickerView view, ClickerConfig config)
+        public ClickerPresenter(ClickerView view, ClickerConfig config, WeatherModel weatherModel, GetWeatherCommandFactory getWeatherCommandFactory, ServerRequestInvoker serverRequestInvoker)
         {
             _view = view;
             _config = config;
+            _weatherModel = weatherModel;
+            _getWeatherCommandFactory = getWeatherCommandFactory;
+            _serverRequestInvoker = serverRequestInvoker;
         }
         
         public void Initialize()
@@ -30,8 +38,22 @@ namespace Screens.Clicker.Presenters
             _disposables = new CompositeDisposable();
             _clickerModel = new ClickerModel(_config);
 
+            OnViewShow();
+
+            _view.ShowCompleted
+                .Subscribe(_ => OnViewShow())
+                .AddTo(_disposables);
+            
+            _view.HideCompleted
+                .Subscribe(_ => OnViewHide())
+                .AddTo(_disposables);
+                
             _view.CollectButtonClick
                 .Subscribe(_ => Collect())
+                .AddTo(_disposables);
+                        
+            _weatherModel.PropertyChanged
+                .Subscribe(_ => _view.UpdateWeather(_weatherModel))
                 .AddTo(_disposables);
 
             UpdateView();
@@ -43,6 +65,28 @@ namespace Screens.Clicker.Presenters
             _cancellationTokenSource?.Cancel();
             _disposables?.Dispose();
             _disposables = null;
+        }
+
+        private void OnViewShow()
+        {
+            _isRunning = true;
+            WeatherRequestInvoker();
+        }
+
+        private void OnViewHide()
+        {
+            _isRunning = false;
+            _serverRequestInvoker.CancelAllCommands();
+        }
+        
+        private async void WeatherRequestInvoker()
+        {
+            while (_isRunning)
+            {
+                var command = _getWeatherCommandFactory.Create();
+                _serverRequestInvoker.EnqueueCommand(command);
+                await UniTask.Delay(TimeSpan.FromSeconds(5));
+            }
         }
         
         private async void StartBackgroundLoops()

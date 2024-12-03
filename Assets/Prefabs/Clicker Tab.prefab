@@ -411,6 +411,7 @@ MonoBehaviour:
   _currencyText: {fileID: 658411720236166372}
   _energyText: {fileID: 2349301452566195887}
   _collectButton: {fileID: 9127446144460440816}
+  _weatherText: {fileID: 8610910616547067477}
 --- !u!1 &4488681301105958039
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +424,7 @@ GameObject:
   - component: {fileID: 7461333156224056827}
   - component: {fileID: 8610910616547067477}
   m_Layer: 5
-  m_Name: Currency Text
+  m_Name: Weather Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -632,7 +633,7 @@ GameObject:
   - component: {fileID: 2273412497341280642}
   - component: {fileID: 2349301452566195887}
   m_Layer: 5
-  m_Name: Currency Text
+  m_Name: Energy Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
