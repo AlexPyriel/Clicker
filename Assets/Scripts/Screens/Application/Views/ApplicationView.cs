@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Core;
-using Screens.Clicker.Views;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,25 +25,25 @@ namespace Screens.Application.Views
         public IObservable<Unit> ClickerButtonClick => _clickerButton.OnClickAsObservable();
         public IObservable<Unit> FactsButtonClick => _factsButton.OnClickAsObservable();
 
-        public void SelectClickerTab()
+        public async void SelectClickerTab()
         {
             _clickerButton.interactable = false;
             _factsButton.interactable = true;
-            _transitionAnimator.Animate(() => SwitchTab(_clickerTab));
+            
+            _transitionAnimator.Animate(() => SwitchTab(_factsTab, _clickerTab));
         }
 
-        public void SelectFactsTab()
+        public async void SelectFactsTab()
         {
             _clickerButton.interactable = true;
             _factsButton.interactable = false;
-            _transitionAnimator.Animate(() => SwitchTab(_factsTab));
+            
+            _transitionAnimator.Animate(() => SwitchTab(_clickerTab,_factsTab));
         }
 
-        private async void SwitchTab(ScreenView targetTab)
+        private async void SwitchTab(ScreenView fromTab, ScreenView targetTab)
         {
-            async void Action(ScreenView tab) => await tab.Hide();
-
-            _tabs.ForEach(Action);
+            await fromTab.Hide();
             await targetTab.Show(); 
         }
     }

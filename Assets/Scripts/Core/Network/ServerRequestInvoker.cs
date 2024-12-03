@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Core.Network
 {
@@ -36,6 +37,7 @@ namespace Core.Network
             }
             
             _commandQueue.Clear();
+            Debug.Log("[ServerRequestInvoker] All commands cancelled.");
         }
         
         public void CancelCommand(IServerCommand serverCommand)

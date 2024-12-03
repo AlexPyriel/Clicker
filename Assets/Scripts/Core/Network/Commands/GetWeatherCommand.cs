@@ -48,6 +48,7 @@ namespace Core.Network
                     Period forecast = weatherData.properties.periods[0];
                     
                     _weatherModel.Update(forecast.name, forecast.temperature, forecast.temperatureUnit);
+                    Debug.Log($"[GetWeatherCommand] Executed. {forecast.name}: {forecast.temperature} {forecast.temperatureUnit}");
                 }
             }
             catch (Exception ex)
@@ -59,6 +60,7 @@ namespace Core.Network
         public void Cancel()
         {
             _cancellationTokenSource?.Cancel();
+            Debug.Log("[GetWeatherCommand] Cancelled.");
         }
     }
     

@@ -122,7 +122,7 @@ namespace Screens.Clicker.Presenters
                 }
                 catch (OperationCanceledException)
                 {
-                    Debug.Log("AutoCollect task cancelled.");
+                    Debug.Log("[AutoCollectLoop] AutoCollect task cancelled.");
                     break;
                 }
             }
@@ -141,7 +141,7 @@ namespace Screens.Clicker.Presenters
                 }
                 catch (OperationCanceledException)
                 {
-                    Debug.Log("Energy regen task cancelled.");
+                    Debug.Log("[EnergyRegenLoop] Energy regen task cancelled.");
                     break;
                 }
             }
