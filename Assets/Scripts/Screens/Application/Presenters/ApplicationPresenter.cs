@@ -19,11 +19,11 @@ namespace Screens.Application.Presenters
         public void Initialize()
         {
             _view.ClickerButtonClick
-                .Subscribe(_ => HandleClickerButtonClick())
+                .Subscribe(_ => OnClickerButtonClick())
                 .AddTo(_disposables);
             
             _view.FactsButtonClick
-                .Subscribe(_ => HandleFactsButtonClick())
+                .Subscribe(_ => OnFactsButtonClick())
                 .AddTo(_disposables);
         }
 
@@ -33,12 +33,12 @@ namespace Screens.Application.Presenters
             _disposables = null;
         }
 
-        private void HandleClickerButtonClick()
+        private void OnClickerButtonClick()
         {
             _view.SelectClickerTab();
         }
 
-        private void HandleFactsButtonClick()
+        private void OnFactsButtonClick()
         {
             _view.SelectFactsTab();
         }

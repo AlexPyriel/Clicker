@@ -12,6 +12,11 @@ namespace Screens
                 .Bind<ApplicationView>()
                 .FromComponentInHierarchy()
                 .AsSingle();
+
+            Container
+                .Bind<ViewTransitionAnimator>()
+                .FromComponentInHierarchy()
+                .AsSingle();
             
             Container
                 .BindInterfacesTo<ApplicationPresenter>()

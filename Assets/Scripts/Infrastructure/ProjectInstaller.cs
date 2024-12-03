@@ -1,4 +1,5 @@
 using Screens;
+using Screens.Clicker.Installers;
 using Zenject;
 
 namespace Infrastructure
@@ -8,6 +9,7 @@ namespace Infrastructure
         public override void InstallBindings()
         {
             ApplicationInstaller.Install(Container);
+            ClickerInstaller.Install(Container);
         }
     }
 }
