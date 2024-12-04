@@ -5,7 +5,6 @@ using Core.UI;
 using Screens.Facts.Models;
 using Screens.Facts.Views;
 using UniRx;
-using UnityEngine;
 using Zenject;
 
 namespace Screens.Facts.Presenters
@@ -22,7 +21,7 @@ namespace Screens.Facts.Presenters
 
         private CancellationTokenSource _cancellationTokenSource;
         private CompositeDisposable _disposables;
-
+        private FactPanelView _currentFactPanelView;
 
         public FactsPresenter(
             FactsView view, 
@@ -58,7 +57,11 @@ namespace Screens.Facts.Presenters
                 .AddTo(_disposables);
             
             _currentFactModel.PropertyChanged
-                .Subscribe(_ => _view.ShowPopup(_currentFactModel))
+                .Subscribe(_ =>
+                {
+                    _currentFactPanelView?.LoaderAnimation.StopAnimation();
+                    _view.ShowPopup(_currentFactModel);
+                })
                 .AddTo(_disposables);
         }
 
@@ -103,6 +106,8 @@ namespace Screens.Facts.Presenters
                 factPanelView.BreedButtonClick
                     .Subscribe(_ =>
                     {
+                        _currentFactPanelView = factPanelView;
+                        factPanelView.LoaderAnimation.StartAnimation();
                         FactRequestInvoker(breed.Id.Value);
                     })
                     .AddTo(_disposables);

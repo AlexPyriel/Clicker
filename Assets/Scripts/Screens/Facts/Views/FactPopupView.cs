@@ -13,7 +13,6 @@ namespace Screens.Facts.Views
 
         public void Initialize(string breedName, string description)
         {
-            Debug.Log("TRIGGERED");
             _nameText.text = breedName;
             _descriptionText.text = description;
         }
