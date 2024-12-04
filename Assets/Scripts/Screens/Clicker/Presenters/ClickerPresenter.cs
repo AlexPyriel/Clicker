@@ -118,7 +118,7 @@ namespace Screens.Clicker.Presenters
                 try
                 {
                     await UniTask.Delay(_config.AutoCollectDelay, cancellationToken: cancellationToken);
-                    Collect();
+                    _view.CollectButton.onClick.Invoke();
                 }
                 catch (OperationCanceledException)
                 {

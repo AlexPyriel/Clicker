@@ -24,6 +24,7 @@ namespace Screens.Clicker.Views
         public IObservable<Unit> CollectButtonClick => _collectButton.OnClickAsObservable();
         public IObservable<Unit> ShowCompleted => _showCompletedSubject.AsObservable();
         public IObservable<Unit> HideCompleted => _hideCompletedSubject.AsObservable();
+        public Button CollectButton => _collectButton;
 
         public override async UniTask Show()
         {
