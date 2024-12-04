@@ -9,6 +9,9 @@ namespace Screens.Facts.Installers
     {
         public override void InstallBindings()
         {
+            Container
+                .Bind<CurrentFactModel>()
+                .AsSingle();
 
             Container
                 .Bind<FactsModel>()

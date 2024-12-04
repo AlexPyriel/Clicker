@@ -19,7 +19,11 @@ namespace Core.Network
                 .AsTransient();
             
             Container
-                .BindFactory<GetFactsCommand, GetFactsCommandFactory>()
+                .BindFactory<GetFactsListCommand, GetFactsListCommandFactory>()
+                .AsTransient();
+            
+            Container
+                .BindFactory<string, GetFactCommand, GetFactCommandFactory>()
                 .AsTransient();
         }
     }

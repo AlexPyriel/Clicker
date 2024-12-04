@@ -240,6 +240,9 @@ GameObject:
   - component: {fileID: 1170987367882480857}
   - component: {fileID: 5122044058378454665}
   - component: {fileID: 9127446144460440816}
+  - component: {fileID: 884906402670543687}
+  - component: {fileID: 6193394583607700788}
+  - component: {fileID: 8442110170638593979}
   m_Layer: 5
   m_Name: Click Button
   m_TagString: Untagged
@@ -348,7 +351,164 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5122044058378454665}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6193394583607700788}
+        m_TargetAssemblyTypeName: Screens.Clicker.ClickEffects, Assembly-CSharp
+        m_MethodName: PlayClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6193394583607700788}
+        m_TargetAssemblyTypeName: Screens.Clicker.ClickEffects, Assembly-CSharp
+        m_MethodName: PlayAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!82 &884906402670543687
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2613273929406519606}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 15b74057374f941759b78b91d442dc35, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &6193394583607700788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2613273929406519606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6770c365632f44f39c035d05f9fe3332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSource: {fileID: 884906402670543687}
+  _clickSound: {fileID: 8300000, guid: fd502564c61474c66953d55b0fee8de7, type: 3}
+  _rewardIcon: {fileID: 21300000, guid: a487232db62b7431e82b82dbc3711d97, type: 3}
+  _targetTransform: {fileID: 954778106924198829}
+--- !u!114 &8442110170638593979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2613273929406519606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 899547b0291b4be1b0244e95fe79ba57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iconImage: {fileID: 0}
+  _target: {fileID: 954778106924198829}
+  _container: {fileID: 1497449513574969565}
+  _yOffset: 1
+  _randOffset: 1
+  _speed: 1
+  _minScale: 0.1
+  _randDelay: 0.44
+  _startScale: {x: 0.75, y: 0.75, z: 0.75}
 --- !u!1 &3202477258330254809
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,9 +568,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65eae5b5dd7344309a2eb9e11155a2da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collectButton: {fileID: 9127446144460440816}
   _currencyText: {fileID: 658411720236166372}
   _energyText: {fileID: 2349301452566195887}
-  _collectButton: {fileID: 9127446144460440816}
   _weatherText: {fileID: 8610910616547067477}
 --- !u!1 &4488681301105958039
 GameObject:

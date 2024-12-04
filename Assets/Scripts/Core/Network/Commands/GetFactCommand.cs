@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Screens.Facts.Models;
@@ -9,15 +8,15 @@ using Zenject;
 
 namespace Core.Network
 {
-    public class GetFactsCommand : IServerCommand
+    public class GetFactCommand : IServerCommand
     {
-        private const string Url = "https://dogapi.dog/api/v2/breeds";
+        private const string FactEndPoint = "https://dogapi.dog/api/v2/breeds/{0}";
+        private string _breedId;
 
         [Serializable]
         public class BreedData
         {
             public string id;
-            public string type;
             public BreedAttributes attributes;
         }
 
@@ -25,37 +24,40 @@ namespace Core.Network
         public class BreedAttributes
         {
             public string name;
+            public string description;
         }
 
         [Serializable]
         public class BreedResponse
         {
-            public List<BreedData> data;
+            public BreedData data;
         }
         
         [Inject] private readonly IServerClient _serverClient;
-        [Inject] private readonly FactsModel _factsModel;
+        [Inject] private readonly CurrentFactModel _currentFactModel;
 
         private readonly CancellationTokenSource _cancellationTokenSource = new ();
 
+        public GetFactCommand(string id)
+        {
+            _breedId = id;
+        }
+
         public async UniTask Execute()
         {
+            string url = string.Format(FactEndPoint, _breedId);
+            
             try
             {
-                var (result, breedResponse) = await _serverClient.SendGetRequestAsync<BreedResponse>(Url, _cancellationTokenSource.Token);
+                var (result, breedResponse) = await _serverClient.SendGetRequestAsync<BreedResponse>(url, _cancellationTokenSource.Token);
 
                 if (result == UnityWebRequest.Result.Success)
                 {
-                    List<FactModel> breeds = new List<FactModel>();
+                    var data = breedResponse.data.attributes;
 
-                    foreach (var breed in breedResponse.data)
-                    {
-                        breeds.Add(new FactModel(breed.id, breed.attributes.name));
-                    }
+                    _currentFactModel.Update(data.name, data.description);
                     
-                    _factsModel.Update(breeds);
-                    
-                    Debug.Log($"[GetFactsCommand] Executed. Facts Length:  {_factsModel.Breeds.Value.Count}");
+                    Debug.Log($"[GetFactCommand] Executed. Fact {data.name} description:  {data.description}");
                 }
             }
             catch (Exception ex)
@@ -71,5 +73,5 @@ namespace Core.Network
         }
     }
     
-    public class GetFactsCommandFactory : PlaceholderFactory<GetFactsCommand> {}
+    public class GetFactCommandFactory : PlaceholderFactory<string, GetFactCommand> {}
 }

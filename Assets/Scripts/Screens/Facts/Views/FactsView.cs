@@ -1,13 +1,18 @@
 using System;
 using Core;
 using Cysharp.Threading.Tasks;
+using Screens.Facts.Models;
 using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Screens.Facts.Views
 {
     public class FactsView : ScreenView
     {
+        [Header("Popup")]
+        [SerializeField] private FactPopupView _factsPopup;
+        [Space]
         [Header("Panels")]
         [SerializeField] private FactPanelView _factsPanelPrefab;
         [SerializeField] private Transform _factsPanelContainer;
@@ -41,6 +46,17 @@ namespace Screens.Facts.Views
             {
                 Destroy(child.gameObject);
             }
+        }
+
+        public void ShowPopup(CurrentFactModel model)
+        {
+            if (model.Name.Value is null) return;
+
+            _factsPopup.Show();
+            _factsPopup.Initialize( model.Name.Value, model.Description.Value );
+            
+            var layoutGroup = _factsPopup.GetComponent<RectTransform>();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(layoutGroup);
         }
     }
 }

@@ -14,7 +14,9 @@ namespace Screens.Facts.Presenters
     {
         private readonly FactsView _view;
         private readonly FactsModel _factsModel;
-        private readonly GetFactsCommandFactory _getFactsCommandFactory;
+        private readonly CurrentFactModel _currentFactModel;
+        private readonly GetFactsListCommandFactory _getFactsListCommandFactory;
+        private readonly GetFactCommandFactory _getFactCommandFactory;
         private readonly ServerRequestInvoker _serverRequestInvoker;
         private readonly UIPanelCreator _panelCreator = new();
 
@@ -22,18 +24,24 @@ namespace Screens.Facts.Presenters
         private CompositeDisposable _disposables;
 
 
-        public FactsPresenter(FactsView view, FactsModel factsModel, GetFactsCommandFactory getFactsCommandFactory, ServerRequestInvoker serverRequestInvoker)
+        public FactsPresenter(
+            FactsView view, 
+            FactsModel factsModel, 
+            CurrentFactModel currentFactModel, 
+            GetFactsListCommandFactory getFactsListCommandFactory, 
+            GetFactCommandFactory getFactCommandFactory, 
+            ServerRequestInvoker serverRequestInvoker)
         {
             _view = view;
             _factsModel = factsModel;
-            _getFactsCommandFactory = getFactsCommandFactory;
+            _currentFactModel = currentFactModel;
+            _getFactsListCommandFactory = getFactsListCommandFactory;
+            _getFactCommandFactory = getFactCommandFactory;
             _serverRequestInvoker = serverRequestInvoker;
         }
 
         public void Initialize()
         {
-            Debug.Log("Initializing Facts Presenter");
-            
             _cancellationTokenSource = new CancellationTokenSource();
             _disposables = new CompositeDisposable();
             
@@ -49,6 +57,9 @@ namespace Screens.Facts.Presenters
                 .Subscribe(_ => InitializeTab(_factsModel))
                 .AddTo(_disposables);
             
+            _currentFactModel.PropertyChanged
+                .Subscribe(_ => _view.ShowPopup(_currentFactModel))
+                .AddTo(_disposables);
         }
 
         public void Dispose()
@@ -60,7 +71,7 @@ namespace Screens.Facts.Presenters
         
         private void OnViewShow()
         {
-            FactsRequestInvoker();
+            FactsListRequestInvoker();
         }
 
         private void OnViewHide()
@@ -68,9 +79,15 @@ namespace Screens.Facts.Presenters
             _serverRequestInvoker.CancelAllCommands();
         }
         
-        private void FactsRequestInvoker()
+        private void FactsListRequestInvoker()
         {
-            var command = _getFactsCommandFactory.Create();
+            var command = _getFactsListCommandFactory.Create();
+            _serverRequestInvoker.EnqueueCommand(command);
+        }
+        
+        private void FactRequestInvoker(string id)
+        {
+            var command = _getFactCommandFactory.Create(id);
             _serverRequestInvoker.EnqueueCommand(command);
         }
 
@@ -86,7 +103,7 @@ namespace Screens.Facts.Presenters
                 factPanelView.BreedButtonClick
                     .Subscribe(_ =>
                     {
-                        Debug.Log($"Breed: {breed.Name}, id: {breed.Id}");
+                        FactRequestInvoker(breed.Id.Value);
                     })
                     .AddTo(_disposables);
             });
