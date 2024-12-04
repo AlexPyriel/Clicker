@@ -691,6 +691,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Clicker Tab
       objectReference: {fileID: 0}
+    - target: {fileID: 3202477258330254809, guid: 21ac99eaf7a7b4daf982fb03956592ea, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3846259437771047152, guid: 21ac99eaf7a7b4daf982fb03956592ea, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1791,6 +1795,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 796063828}
     m_Modifications:
+    - target: {fileID: 2767133138780125269, guid: e68813f3306ea4114b56caa1e934005e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 190
+      objectReference: {fileID: 0}
     - target: {fileID: 5311525748690129333, guid: e68813f3306ea4114b56caa1e934005e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1874,6 +1882,30 @@ PrefabInstance:
     - target: {fileID: 7389920588802986320, guid: e68813f3306ea4114b56caa1e934005e, type: 3}
       propertyPath: m_Name
       value: Facts Tab
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389920588802986320, guid: e68813f3306ea4114b56caa1e934005e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7546330242802048373, guid: e68813f3306ea4114b56caa1e934005e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7546330242802048373, guid: e68813f3306ea4114b56caa1e934005e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7546330242802048373, guid: e68813f3306ea4114b56caa1e934005e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7546330242802048373, guid: e68813f3306ea4114b56caa1e934005e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 540
+      objectReference: {fileID: 0}
+    - target: {fileID: 7546330242802048373, guid: e68813f3306ea4114b56caa1e934005e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -115
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

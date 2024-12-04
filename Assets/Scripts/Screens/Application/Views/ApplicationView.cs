@@ -25,7 +25,7 @@ namespace Screens.Application.Views
         public IObservable<Unit> ClickerButtonClick => _clickerButton.OnClickAsObservable();
         public IObservable<Unit> FactsButtonClick => _factsButton.OnClickAsObservable();
 
-        public async void SelectClickerTab()
+        public void SelectClickerTab()
         {
             _clickerButton.interactable = false;
             _factsButton.interactable = true;
@@ -33,7 +33,7 @@ namespace Screens.Application.Views
             _transitionAnimator.Animate(() => SwitchTab(_factsTab, _clickerTab));
         }
 
-        public async void SelectFactsTab()
+        public void SelectFactsTab()
         {
             _clickerButton.interactable = true;
             _factsButton.interactable = false;

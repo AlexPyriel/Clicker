@@ -1,6 +1,7 @@
 using Core.Network;
 using Screens;
 using Screens.Clicker.Installers;
+using Screens.Facts.Installers;
 using UnityEngine;
 using Zenject;
 
@@ -12,7 +13,8 @@ namespace Infrastructure
         {
             Install<ApplicationInstaller>();
             Install<ClickerInstaller>();
-            Install<NetworkInstaller>();    
+            Install<FactsInstaller>();
+            Install<NetworkInstaller>();
         }
         
         private void Install<T>() where T : Installer<T>

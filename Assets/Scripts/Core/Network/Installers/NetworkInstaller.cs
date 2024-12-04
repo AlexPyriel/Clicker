@@ -17,6 +17,10 @@ namespace Core.Network
             Container
                 .BindFactory<GetWeatherCommand, GetWeatherCommandFactory>()
                 .AsTransient();
+            
+            Container
+                .BindFactory<GetFactsCommand, GetFactsCommandFactory>()
+                .AsTransient();
         }
     }
 }

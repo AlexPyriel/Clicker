@@ -16,9 +16,9 @@ namespace Screens.Clicker.Presenters
         private readonly ClickerView _view;
         private readonly ClickerConfig _config;
         private readonly WeatherModel _weatherModel;
+        private ClickerModel _clickerModel;
         private readonly GetWeatherCommandFactory _getWeatherCommandFactory;
         private readonly ServerRequestInvoker _serverRequestInvoker;
-        private ClickerModel _clickerModel;
         private CancellationTokenSource _cancellationTokenSource;
         private CompositeDisposable _disposables;
         private bool _isRunning = true;
